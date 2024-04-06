@@ -24,4 +24,4 @@ runcmd:
 write_files:
   - path: /etc/exports
     content: |
-      ${nfs_disk_mount_path} *(rw,sync,no_subtree_check)
+      ${nfs_disk_mount_path} ${nfs_allowed_from}(rw,sync,no_subtree_check)
