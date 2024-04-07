@@ -8,9 +8,12 @@ resource "helm_release" "nfs_driver" {
 }
 
 resource "time_sleep" "wait_for_cloud_init" {
-  depends_on = [yandex_compute_instance.nfs]
-
+  depends_on      = [yandex_compute_instance.nfs]
   create_duration = "90s"
+
+  lifecycle {
+    replace_triggered_by = [yandex_compute_instance.nfs]
+  }
 }
 
 resource "helm_release" "nfs_provisioner" {
